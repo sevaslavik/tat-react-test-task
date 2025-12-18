@@ -1,14 +1,9 @@
-import { Button } from "./components/atoms/button";
-import { TextInput } from "./components/atoms/text-input";
-import { Typography } from "./components/atoms/typography";
+import { SearchForm } from "./components/organisms/search-form";
 
 function App() {
   return (
     <>
-      <Typography variant="h1">base</Typography>
-      <Typography>base</Typography>
-      <TextInput />
-      <Button>test</Button>
+      <SearchForm />
     </>
   );
 }
