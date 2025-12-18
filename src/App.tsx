@@ -1,10 +1,12 @@
 import { Button } from "./components/atoms/button";
-import { TextInput } from "./components/atoms/text-input/TextInput";
+import { TextInput } from "./components/atoms/text-input";
+import { Typography } from "./components/atoms/typography";
 
 function App() {
   return (
     <>
-      <h1>Init poroject</h1>
+      <Typography variant="h1">base</Typography>
+      <Typography>base</Typography>
       <TextInput />
       <Button>test</Button>
     </>
