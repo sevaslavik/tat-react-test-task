@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { GeoService } from "../services/geo-service";
 import type { DropdownItemData } from "../entities/geo/dropdown.types";
 
@@ -13,24 +13,24 @@ export const useGeoSearch = () => {
     setQuery(searchQuery.label);
   };
 
-  const loadCountries = async () => {
+  const loadCountries = useCallback(async () => {
     const countries = await GeoService.fetchCountries();
-    const dropdownItems = countries.map((c) => ({
-      id: c.id,
-      label: c.name,
-      type: "country" as const,
-      imageSrc: c.flag,
-    }));
-    setSearchResults(dropdownItems);
-  };
+    setSearchResults(
+      countries.map((c) => ({
+        id: c.id,
+        label: c.name,
+        type: "country" as const,
+        imageSrc: c.flag,
+      }))
+    );
+  }, []);
 
-  const fetchResults = async () => {
+  const fetchResults = useCallback(async () => {
     const results = await GeoService.search(query);
     setSearchResults(results);
-  };
+  }, [query]);
 
   const handleFocus = async () => {
-    console.log("value", value)
     if (!value || value?.type === "country") {
       await loadCountries();
     } else {
@@ -39,15 +39,20 @@ export const useGeoSearch = () => {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadCountries();
-  }, []);
+    const fetchData = async () => {
+      await loadCountries();
+    };
+
+    fetchData();
+  }, [loadCountries]);
 
   useEffect(() => {
     if (!query) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchResults();
-  }, [query]);
+    const fetchSearch = async () => {
+      fetchResults();
+    };
+    fetchSearch();
+  }, [query, fetchResults]);
 
   return {
     query,
@@ -56,6 +61,6 @@ export const useGeoSearch = () => {
     open,
     setOpen,
     handleSelect,
-    handleFocus
+    handleFocus,
   };
 };
