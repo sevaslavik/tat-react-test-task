@@ -1,27 +1,25 @@
-import React from "react";
-import { Icon } from "../icon/Icon";
+import React, { type ComponentPropsWithoutRef } from "react";
 
-export interface DropdownItemProps {
+import { Icon } from "../icon/Icon";
+import styles from "./styles.module.css";
+import clsx from "clsx";
+
+export interface DropdownItemProps extends ComponentPropsWithoutRef<"li"> {
   label: string;
   icon?: "city" | "hotel";
   imageSrc?: string;
+  className?: string;
 }
 
 export const DropdownItem: React.FC<DropdownItemProps> = ({
   label,
   icon,
   imageSrc,
+  className,
+  ...props
 }) => {
   return (
-    <li
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 8,
-        padding: "4px 8px",
-        cursor: "pointer",
-      }}
-    >
+    <li className={clsx(styles.dropdownItem, className)} {...props}>
       {icon && <Icon name={icon} size={20} />}
       {imageSrc && (
         <img

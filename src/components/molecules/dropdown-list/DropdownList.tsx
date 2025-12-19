@@ -7,23 +7,23 @@ import {
   shift,
   autoUpdate,
 } from "@floating-ui/react";
-import {
-  DropdownItem,
-  type DropdownItemProps,
-} from "../../atoms/dropdown-item/DropdownItem";
+import { DropdownItem } from "../../atoms/dropdown-item/DropdownItem";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import type { DropdownItemData } from "../../../entities/geo/dropdown.types";
 
 interface DropdownListProps {
-  items: DropdownItemProps[];
+  items: DropdownItemData[];
   open: boolean;
-  referenceRef: React.RefObject<HTMLElement | null>; // ссылка на Input или любой элемент
+  referenceRef: React.RefObject<HTMLElement | null>;
+  onSelect: (item: DropdownItemData) => void;
 }
 
 export const DropdownList: React.FC<DropdownListProps> = ({
   items,
   open,
   referenceRef,
+  onSelect,
 }) => {
   const floatingRef = useRef<HTMLUListElement>(null);
 
@@ -45,7 +45,13 @@ export const DropdownList: React.FC<DropdownListProps> = ({
   return (
     <ul ref={floatingRef} className={clsx(styles.dropdownList)}>
       {items.map((item) => (
-        <DropdownItem key={item.label} {...item} />
+        <DropdownItem
+          key={item.label}
+          label={item.label}
+          icon={item.icon}
+          imageSrc={item.imageSrc}
+          onClick={() => onSelect(item)}
+        />
       ))}
     </ul>
   );
