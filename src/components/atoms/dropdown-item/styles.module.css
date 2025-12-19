@@ -1,0 +1,7 @@
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
