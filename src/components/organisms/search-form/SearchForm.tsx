@@ -18,6 +18,7 @@ export const SearchForm = () => {
       <TextInput
         ref={inputRef}
         value={query}
+        className={styles.searchField}
         onChange={(e) => {
           setQuery(e.target.value);
           setOpen(true);
@@ -30,7 +31,7 @@ export const SearchForm = () => {
         open={open}
         referenceRef={inputRef}
       />
-      <Button>Знайти</Button>
+      <Button className={styles.btn}>Знайти</Button>
     </form>
   );
 };

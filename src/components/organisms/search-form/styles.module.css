@@ -17,3 +17,11 @@
   border: 1px solid #ccc;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+
+.searchField {
+  margin: 8px 0;
+}
+
+.btn {
+  margin-top: 8px;
+}
