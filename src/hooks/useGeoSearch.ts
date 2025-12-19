@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GeoService, } from "../services/info-service";
+import { GeoService, } from "../services/geo-service";
 import type { DropdownItemData } from "../entities/geo/dropdown.types";
 
 export const useGeoSearch = () => {
