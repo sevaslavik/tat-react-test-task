@@ -10,10 +10,28 @@ import { useGeoSearch } from "../../../hooks/useGeoSearch";
 
 export const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { query, setQuery, searchResults, open, setOpen } = useGeoSearch();
+  const {
+    query,
+    setQuery,
+    searchResults,
+    open,
+    setOpen,
+    handleSelect,
+    handleFocus,
+  } = useGeoSearch();
+
+  const onHandleFocus = () => {
+    setOpen(true);
+    handleFocus();
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Submitted");
+  };
 
   return (
-    <form className={clsx(styles.form)}>
+    <form className={clsx(styles.form)} onSubmit={handleSubmit}>
       <Typography variant="h2">Форма пошуку турів</Typography>
       <TextInput
         ref={inputRef}
@@ -23,15 +41,18 @@ export const SearchForm = () => {
           setQuery(e.target.value);
           setOpen(true);
         }}
-        onFocus={() => setOpen(true)}
+        onFocus={onHandleFocus}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
       />
       <DropdownList
         items={searchResults ?? []}
         open={open}
         referenceRef={inputRef}
+        onSelect={(option) => handleSelect(option)}
       />
-      <Button className={styles.btn}>Знайти</Button>
+      <Button type="submit" className={styles.btn}>
+        Знайти
+      </Button>
     </form>
   );
 };
