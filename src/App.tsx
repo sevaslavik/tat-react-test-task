@@ -1,7 +1,9 @@
+import { SearchForm } from "./components/organisms/search-form";
+
 function App() {
   return (
     <>
-      <h1>Init poroject</h1>
+      <SearchForm />
     </>
   );
 }
