@@ -58,6 +58,7 @@ export const useGeoSearch = () => {
     query,
     setQuery,
     searchResults,
+    value,
     open,
     setOpen,
     handleSelect,
