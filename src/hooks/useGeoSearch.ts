@@ -1,14 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
 import { GeoService } from "../services/geo-service";
 import type { DropdownItemData } from "../entities/geo/dropdown.types";
+import { useCountryStore } from "../store/country.store";
 
 export const useGeoSearch = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<DropdownItemData[]>();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<DropdownItemData>();
+  const { setCountry } = useCountryStore();
 
   const handleSelect = (searchQuery: DropdownItemData): void => {
+    setCountry({
+      id: searchQuery.id as string,
+      name: searchQuery.label,
+      flag: searchQuery.imageSrc as string,
+    });
     setValue(searchQuery);
     setQuery(searchQuery.label);
   };
