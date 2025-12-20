@@ -39,7 +39,7 @@ export const HotelCard = ({
         <div className={styles.price}>
           <Typography variant="bodySm">Старт туру :</Typography>
           <Typography variant="bodySm">
-            {formatDate(hotel.prices[0].startDate)}
+            {formatDate(hotel.prices?.[0]?.startDate) ?? "Дата не зазначена"}
           </Typography>
           <Typography variant="h3">
             {hotel.prices[0].amount} {hotel.prices[0].currency.toUpperCase()}
