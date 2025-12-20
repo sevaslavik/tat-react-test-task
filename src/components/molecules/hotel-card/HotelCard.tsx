@@ -21,7 +21,7 @@ export const HotelCard = ({
     <div className={clsx(styles.card, className)}>
       <Image src={hotel.img} alt={hotel.name} />
 
-      <Typography variant="h3">{hotel.name}</Typography>
+      <Typography className={styles.title} variant="h3">{hotel.name}</Typography>
       <div className={styles.location}>
         {countryFlag && (
           <img
