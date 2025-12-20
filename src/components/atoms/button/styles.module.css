@@ -1,23 +1,28 @@
-/* styles.module.css */
-.btn {
-  padding: 8px 16px;
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 12px 20px;
   border-radius: 6px;
+  font-weight: 600;
   border: none;
+
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
-.btnPrimary {
-  background-color: #1a73e8;
-  color: white;
+.primary {
+  background-color: #2563eb;
+  color: #fff;
 }
 
-.btnSecondary {
-  background-color: #e8e8e8;
-  color: black;
+.primary:hover:not(:disabled) {
+  background-color: #1d4ed8;
 }
 
-.btnDanger {
-  background-color: #e53935;
-  color: white;
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

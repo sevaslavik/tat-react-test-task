@@ -7,6 +7,7 @@ import { Button } from "../../atoms/button";
 import { DropdownList } from "../../molecules/dropdown-list/DropdownList";
 import { useRef } from "react";
 import { useGeoSearch } from "../../../hooks/useGeoSearch";
+import { useSearchPrices } from "../../../hooks/usePrices";
 
 export const SearchForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,23 +16,29 @@ export const SearchForm = () => {
     setQuery,
     searchResults,
     open,
+    value,
     setOpen,
     handleSelect,
     handleFocus,
   } = useGeoSearch();
+
+  const { state, searchPrices } = useSearchPrices();
 
   const onHandleFocus = () => {
     setOpen(true);
     handleFocus();
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitted");
+    if (value) {
+      await searchPrices(value.id.toString());
+    }
   };
 
   return (
-    <form className={clsx(styles.form)} onSubmit={handleSubmit}>
+    <form className={clsx(styles.form)} onSubmit={(e) => handleSubmit(e)}>
       <Typography variant="h2">Форма пошуку турів</Typography>
       <TextInput
         ref={inputRef}
@@ -50,7 +57,11 @@ export const SearchForm = () => {
         referenceRef={inputRef}
         onSelect={(option) => handleSelect(option)}
       />
-      <Button type="submit" className={styles.btn}>
+      <Button
+        disabled={state.status === "loading"}
+        type="submit"
+        className={styles.btn}
+      >
         Знайти
       </Button>
     </form>

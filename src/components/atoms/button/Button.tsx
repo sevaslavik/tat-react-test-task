@@ -1,6 +1,7 @@
 import type { ComponentProps } from "react";
 
 import styles from "./styles.module.css";
+import clsx from "clsx";
 
 type CustomBtnProps = ComponentProps<"button"> & {
   variant?: "primary" | "secondary" | "danger";
@@ -9,17 +10,19 @@ type CustomBtnProps = ComponentProps<"button"> & {
 export const Button = ({
   variant = "primary",
   className,
+  disabled,
   ...rest
 }: CustomBtnProps) => {
-  const variantClass = {
-    primary: styles.btnPrimary,
-    secondary: styles.btnSecondary,
-    danger: styles.btnDanger,
-  }[variant || "primary"];
 
   return (
     <button
-      className={`${styles.btn} ${variantClass} ${className || ""}`}
+      className={clsx(
+        styles.button,
+        styles[variant],
+        disabled && styles.disabled,
+        className
+      )}
+      disabled={disabled}
       {...rest}
     />
   );
