@@ -13,13 +13,9 @@ export const useSearchPrices = () => {
 
     try {
       const { token } = await PricesService.startSearch(countryId);
-
       const result = await PricesService.fetchSearchPrices(token);
-
-      
-
       const pricesArray: PriceOffer[] = Object.values(result.prices);
-      console.log("pricesArray", pricesArray);
+
       if (pricesArray.length === 0) {
         setState({ status: "empty" });
         return;
