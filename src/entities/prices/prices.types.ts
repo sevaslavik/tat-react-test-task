@@ -1,4 +1,4 @@
-type PriceOffer = {
+export type PriceOffer = {
   id: string; // UUID
   amount: number; // 1500–4000
   currency: "usd"; // нижній регістр за поточною реалізацією
