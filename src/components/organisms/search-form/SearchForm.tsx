@@ -31,7 +31,6 @@ export const SearchForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Submitted");
     if (value) {
       await searchPrices(value.id.toString());
     }
